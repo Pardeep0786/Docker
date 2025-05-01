@@ -1,0 +1,197 @@
+
+C:\Users\Pardeep Kumar>::To pull the image on docker
+C:\Users\Pardeep Kumar>docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+e6590344b1a5: Pull complete
+Digest: sha256:c41088499908a59aae84b0a49c70e86f4731e588a737f1637e73c8c09d995654
+Status: Downloaded newer image for hello-world:latest
+docker.io/library/hello-world:latest
+
+C:\Users\Pardeep Kumar>::To see that image which is created on docker
+C:\Users\Pardeep Kumar>docker images
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+hello-world   latest    74cc54e27dc4   3 months ago   10.1kB
+
+
+C:\Users\Pardeep Kumar>::To make the container from the image
+C:\Users\Pardeep Kumar>docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+C:\Users\Pardeep Kumar>::To see the container
+C:\Users\Pardeep Kumar>docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
+e89893aaca18   hello-world   "/hello"   56 seconds ago   Exited (0) 56 seconds ago             vigorous_hellman
+
+
+C:\Users\Pardeep Kumar>::To remove the image from the docker
+C:\Users\Pardeep Kumar>::First we need to delete the container
+C:\Users\Pardeep Kumar>docker rm e89893aaca18
+e89893aaca18
+
+C:\Users\Pardeep Kumar>::The docker container is removed now we can delete the image
+C:\Users\Pardeep Kumar>docker rmi hello-world
+Untagged: hello-world:latest
+Untagged: hello-world@sha256:c41088499908a59aae84b0a49c70e86f4731e588a737f1637e73c8c09d995654
+Deleted: sha256:74cc54e27dc41bb10dc4b2226072d469509f2f22f1a3ce74f4a59661a1d44602
+Deleted: sha256:63a41026379f4391a306242eb0b9f26dc3550d863b7fdbb97d899f6eb89efe72
+
+
+C:\Users\Pardeep Kumar>::The image is deleted
+C:\Users\Pardeep Kumar>::We can also check the image is exist or not
+C:\Users\Pardeep Kumar>docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+
+C:\Users\Pardeep Kumar>::We can see the image is deleted
+C:\Users\Pardeep Kumar>::We can also run the application of another operating system in our machine
+C:\Users\Pardeep Kumar>::let's see the example, in this example we pull the ubuntu image which is from linux os
+C:\Users\Pardeep Kumar>docker pull ubuntu
+Using default tag: latest
+latest: Pulling from library/ubuntu
+2726e237d1a3: Pull complete
+Digest: sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02
+Status: Downloaded newer image for ubuntu:latest
+docker.io/library/ubuntu:latest
+
+C:\Users\Pardeep Kumar>::let's run this image as interactive mode so that we can also do some another operations with it
+C:\Users\Pardeep Kumar>docker run -it ubuntu
+root@1095ececc42c:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@1095ececc42c:/# ::We can also make our own directory in it
+root@1095ececc42c:/# mkdir Pardeep
+root@1095ececc42c:/# ls
+Pardeep  bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@1095ececc42c:/# ::To comeback from the root we can use exit function
+root@1095ececc42c:/# exit
+exit
+
+C:\Users\Pardeep Kumar>::We can also write the name for our container
+C:\Users\Pardeep Kumar>::So let's pull the another image to do this
+
+C:\Users\Pardeep Kumar>docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+cea172a6e83b: Pull complete
+fa811e9a869e: Pull complete
+47a2982daa21: Pull complete
+634d7076afe3: Pull complete
+aa8a3958f09f: Pull complete
+84e4e5ea3754: Pull complete
+2275c0ff11a0: Pull complete
+2792ea2d4e0e: Pull complete
+f488b2cd8494: Pull complete
+9451290759df: Pull complete
+Digest: sha256:7839322bd6c3174a699586c3ea36314c59b61b4ce01b4146951818b94aef5fd7
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+
+C:\Users\Pardeep Kumar>docker run -d -e MYSQL_ROOT_PASSWORD=secret --name latest-mysql mysql
+efce889fd978c3dff1a4a235408ca19fa208f76a850ded835a65c4bbe5ebab7c
+
+C:\Users\Pardeep Kumar>::let's see the container and it's name
+C:\Users\Pardeep Kumar>docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                       PORTS                 NAMES
+efce889fd978   mysql     "docker-entrypoint.s…"   27 seconds ago   Up 26 seconds                3306/tcp, 33060/tcp   latest-mysql
+1095ececc42c   ubuntu    "/bin/bash"              10 minutes ago   Exited (127) 9 minutes ago                         serene_saha
+
+C:\Users\Pardeep Kumar>::let's perfrom the port binding between host machine and container
+C:\Users\Pardeep Kumar>::So first we need to pull an image
+C:\Users\Pardeep Kumar>::And during the container construction we can run the container with port binding
+C:\Users\Pardeep Kumar>docker pull mysql:8.0
+8.0: Pulling from library/mysql
+c2eb5d06bfea: Pull complete
+253ce0d09858: Pull complete
+fb10e0b9f49b: Pull complete
+142bf0fa8655: Pull complete
+8609c4bc4339: Pull complete
+a48ef6c0e15d: Pull complete
+26b53dc04f70: Pull complete
+cc6ed31dcc2a: Pull complete
+e0211b440535: Pull complete
+6c1e029c2325: Pull complete
+c0468773f197: Pull complete
+Digest: sha256:eb6ab151938d7872c9e1a4d472515ee0d33f91262c76c0404760c16d1cc5b3e9
+Status: Downloaded newer image for mysql:8.0
+docker.io/library/mysql:8.0
+
+C:\Users\Pardeep Kumar>::let's peform the port binding
+C:\Users\Pardeep Kumar>docker run -d -e MYSQL_ROOT_PASSWORD=secret -p8080:3306 mysql:8.0
+1f921eca9eea802a8ae84fd5449fa46c4d179edbf342acd803a4c9e3b72a3384
+
+C:\Users\Pardeep Kumar>::The port binding is performed now we can see that
+C:\Users\Pardeep Kumar>docker ps -a
+CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS                       PORTS                               NAMES
+1f921eca9eea   mysql:8.0   "docker-entrypoint.s…"   43 seconds ago   Up 41 seconds                33060/tcp, 0.0.0.0:8080->3306/tcp   pensive_bell
+efce889fd978   mysql       "docker-entrypoint.s…"   9 hours ago      Exited (255) 7 minutes ago   3306/tcp, 33060/tcp                 latest-mysql
+1095ececc42c   ubuntu      "/bin/bash"              10 hours ago     Exited (127) 10 hours ago                                        serene_saha
+
+C:\Users\Pardeep Kumar>::In this first container, in ports section we can see port binding
+
+C:\Users\Pardeep Kumar>::let's see the example of how we can create volume
+C:\Users\Pardeep Kumar>docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+c2eb5d06bfea: Already exists
+ba361f0ba5e7: Pull complete
+0e83af98b000: Pull complete
+770e931107be: Pull complete
+a2be1b721112: Pull complete
+68c594672ed3: Pull complete
+cfd201189145: Pull complete
+e9f009c5b388: Pull complete
+61a291920391: Pull complete
+c8604ede059a: Pull complete
+Digest: sha256:5b6721618bb2a0e27f1792054c5ad5855586acae2d38bb4910849d6eb2a52840
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+
+C:\Users\Pardeep Kumar>docker run -v myvolume:/var/lib/mysql mysql
+2025-04-30 02:54:12+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 9.3.0-1.el9 started.
+2025-04-30 02:54:12+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2025-04-30 02:54:12+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 9.3.0-1.el9 started.
+2025-04-30 02:54:12+00:00 [ERROR] [Entrypoint]: Database is uninitialized and password option is not specified
+    You need to specify one of the following as an environment variable:
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_ALLOW_EMPTY_PASSWORD
+    - MYSQL_RANDOM_ROOT_PASSWORD
+
+C:\Users\Pardeep Kumar>::To see the existing volume
+C:\Users\Pardeep Kumar>docker volume ls
+DRIVER    VOLUME NAME
+local     2cee0dae5ed44583d9ca33839b6e09a15f7ed1f603d1461d18bb47d993e08964
+local     3fc435280fe884924ba7c9c28d10646ec13dd379465c5ecead2d12591afc904e
+local     42f85e400a11eabc97c9d7f671cd70f09a5783c723dda813520f13a9913a85ef
+local     80ded27b5fab1c48dbbf0875eb3dccd7ebe5052da02cca6c2276ee44f3809417
+local     93b5a208cf203838c1b1cf74e5601abede008c2f4aee863c4f73c3d7638d92c3
+local     952b7d63a6d705b5c73accec89a9a5da77f429792a9adf274585657cb548a755
+local     ab4af9cdb9a747df9d0bcfc21735fe9326c45cf5857f87dac318fe0cdc4dc6a1
+local     b6928cfddfb8226d49e2ed17e08d48b96e1e8068692d810da80cc4b39172e415
+local     dabab3c84c19c7cb9bc95762a900928366e1024b8f76a5fa0107abe52ed499b6
+local     ec3d3c8858836ae17911738d879452cb0a3d0c9b87d669463aacfd28945e3219
+local     faa0f4508a59f442ce7cee223f4627f40564e7581078dfca2a10fc4c67e765ed
+local     myvolume
+
+
